@@ -47,9 +47,11 @@ El objetivo es demostrar cómo la granularidad del bloqueo afecta al rendimiento
 - **Mutex Global**: Convierte el sistema en secuencial, aumentando drásticamente los tiempos de espera y fallos.
 
 ## 👥 Créditos y Autoría
-- **Desarrollador**: [Tu Nombre/Usuario]
-- **Materia**: Sistemas Operativos (SSOO)
-- **Tutor/AI**: Antigravity (Google DeepMind)
+- **Desarrollador**: Rubén Gámez Torrijos
+- **Asignatura**: Sistemas Operativos (SS.OO.)
+- **Profesor**: Diego
+- **Universidad**: Universidad Europea de Madrid (UEM)
+- **Curso**: 2025-2026
 
 ---
 *Este proyecto es parte de una actividad académica para el estudio de hilos, secciones críticas y exclusión mutua.*
