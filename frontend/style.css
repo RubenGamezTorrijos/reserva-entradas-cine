@@ -1,0 +1,234 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --primary: #38bdf8;
+    --accent: #f97316;
+    --danger: #ef4444;
+    --text: #f8fafc;
+    --text-dim: #94a3b8;
+    --success: #22c55e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+}
+
+header h1 span {
+    color: var(--primary);
+}
+
+header p {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.controls h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 0.75rem;
+}
+
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+button.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cinema-view {
+    grid-row: span 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.screen {
+    width: 80%;
+    height: 10px;
+    background: linear-gradient(to bottom, var(--primary), transparent);
+    margin: 1rem 0 3rem;
+    border-radius: 50% / 100% 100% 0 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--primary);
+    filter: blur(1px);
+}
+
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+
+.seat {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.seat.reserved {
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    border-color: transparent;
+}
+
+.seat.contested {
+    background: var(--danger);
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(1.2); opacity: 0.7; }
+}
+
+.legend {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.legend .item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.dot.available { background: rgba(255, 255, 255, 0.2); }
+.dot.contested { background: var(--danger); }
+.dot.reserved { background: var(--accent); }
+
+.stats-view {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 1.5rem;
+}
+
+.stat-card h3 {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.log-card {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-content {
+    flex: 1;
+    overflow-y: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    padding-top: 0.5rem;
+}
+
+.log-entry {
+    margin-bottom: 2px;
+}
+
+.log-entry.success { color: var(--success); }
+.log-entry.fail { color: var(--danger); }
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}

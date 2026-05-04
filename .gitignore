@@ -1,0 +1,13 @@
+# Binaries
+*.exe
+reserva_cine
+*.o
+
+# Web dependencies
+node_modules/
+dist/
+.DS_Store
+
+# Brain/Artifacts (Optional, but usually good to keep outside of the main repo if they are just logs)
+brain/
+.gemini/

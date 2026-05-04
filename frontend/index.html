@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSync - Dashboard de Concurrencia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Cine<span>Sync</span></h1>
+            <p>Simulador de Concurrencia y Sincronización</p>
+        </header>
+
+        <main>
+            <section class="controls card">
+                <h2>Simulación</h2>
+                <div class="control-group">
+                    <label>Usuarios (Hilos)</label>
+                    <input type="range" id="threadCount" min="1" max="100" value="50">
+                    <span id="threadCountVal">50</span>
+                </div>
+                <div class="control-group">
+                    <label>Velocidad</label>
+                    <input type="range" id="speed" min="1" max="10" value="5">
+                </div>
+                <button id="startBtn">Iniciar Simulación</button>
+                <button id="resetBtn" class="secondary">Reiniciar</button>
+            </section>
+
+            <section class="cinema-view card">
+                <div class="screen">PANTALLA</div>
+                <div id="seatGrid" class="seat-grid"></div>
+                <div class="legend">
+                    <div class="item"><span class="dot available"></span> Disponible</div>
+                    <div class="item"><span class="dot contested"></span> Compitiendo</div>
+                    <div class="item"><span class="dot reserved"></span> Reservado</div>
+                </div>
+            </section>
+
+            <section class="stats-view">
+                <div class="stat-card card">
+                    <h3>Reservas</h3>
+                    <p id="successCount">0</p>
+                </div>
+                <div class="stat-card card">
+                    <h3>Colisiones</h3>
+                    <p id="collisionCount">0</p>
+                </div>
+                <div class="stat-card card log-card">
+                    <h3>Actividad del Sistema</h3>
+                    <div id="logContent" class="log-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
