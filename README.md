@@ -1,6 +1,6 @@
 # Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
-![Status](https://img.shields.io/badge/Status-Version%201.0.0-blue)
+![Status](https://img.shields.io/badge/Status-Version%201.2.0-blue)
 ![Language](https://img.shields.io/badge/Language-C%20%2F%20JavaScript-orange)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%2F%20Windows-green)
 
@@ -14,7 +14,7 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
 
 ## 📂 Estructura del Proyecto
 - `reserva_cine.c`: Código fuente en C para la terminal.
-- `frontend/`: Aplicación web interactiva.
+- `index.html`, `style.css`, `main.js`: Aplicación web interactiva.
 - `Makefile`: Script de compilación para sistemas tipo Unix.
 - `setup_windows.ps1`: Script de automatización para Windows.
 - `setup_linux.sh`: Script de automatización para Ubuntu Linux.

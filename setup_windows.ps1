@@ -23,7 +23,7 @@ if ($LASTEXITCODE -eq 0) {
 
 # 3. Lanzar Frontend (Opcional)
 Write-Host "[3/3] Preparando visualización..." -ForegroundColor Yellow
-$htmlPath = Join-Path (Get-Location) "frontend\index.html"
+$htmlPath = Join-Path (Get-Location) "index.html"
 Write-Host "Puedes abrir el frontend manualmente en: $htmlPath" -ForegroundColor Cyan
 
 Write-Host "`n--- Instalación Completada con Éxito ---" -ForegroundColor Green
