@@ -51,7 +51,7 @@ El objetivo es demostrar cómo la granularidad del bloqueo afecta al rendimiento
 - **Asignatura**: Sistemas Operativos (SS.OO.)
 - **Profesor**: Diego
 - **Universidad**: Universidad Europea de Madrid (UEM)
-- **Curso**: 2025-2026
+- **Grado**: Ingeniería Informática
 
 ---
 *Este proyecto es parte de una actividad académica para el estudio de hilos, secciones críticas y exclusión mutua.*
