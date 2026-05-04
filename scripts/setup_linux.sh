@@ -16,9 +16,9 @@ fi
 
 # 2. Compilar C
 echo -e "\033[0;33m[2/3] Compilando backend en C...\033[0m"
-gcc -Wall -Wextra -pthread reserva_cine.c -o reserva_cine
+gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine
 if [ $? -eq 0 ]; then
-    echo -e "\033[0;32mOK: Compilación exitosa. Ejecutable: ./reserva_cine\033[0m"
+    echo -e "\033[0;32mOK: Compilación exitosa. Ejecutable: ./src/reserva_cine\033[0m"
 else
     echo -e "\033[0;31mERROR: Falló la compilación.\033[0m"
     exit 1
@@ -26,7 +26,7 @@ fi
 
 # 3. Instrucciones Frontend
 echo -e "\033[0;33m[3/3] Frontend listo.\033[0m"
-echo "Para visualizar el dashboard, abre 'index.html' en tu navegador."
+echo "Para visualizar el dashboard, abre 'web/index.html' en tu navegador."
 
 echo -e "\n\033[0;32m--- Instalación Completada ---\033[0m"
-echo "Ejecuta './reserva_cine' para iniciar la simulación en terminal."
+echo "Ejecuta './src/reserva_cine' para iniciar la simulación en terminal."

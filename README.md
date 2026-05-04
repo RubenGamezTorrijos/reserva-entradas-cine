@@ -12,12 +12,11 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
 - **Simulación Multi-estrategia**: Compara la eficiencia de un Mutex Global frente a Mutexes Granulares.
 - **Gestión de Prioridades**: Simulación de hilos con prioridades (Usuarios VIP).
 
-## 📂 Estructura del Proyecto
-- `reserva_cine.c`: Código fuente en C para la terminal.
-- `index.html`, `style.css`, `main.js`: Aplicación web interactiva.
-- `Makefile`: Script de compilación para sistemas tipo Unix.
-- `setup_windows.ps1`: Script de automatización para Windows.
-- `setup_linux.sh`: Script de automatización para Ubuntu Linux.
+## 📂 Estructura del Proyecto (MVC Pattern)
+- **`src/`**: Lógica de negocio y backend en C.
+- **`web/`**: Interfaz de usuario (Vista/Controlador) en HTML/JS.
+- **`scripts/`**: Automatización de compilación y despliegue.
+- **`README.md`**: Documentación principal.
 
 ## 🛠️ Requisitos e Instalación
 
@@ -28,18 +27,18 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
 ### Implementación Rápida (Scripts)
 
 #### Windows (PowerShell)
-1. Abre PowerShell como administrador.
+1. Abre PowerShell como administrador en la raíz del proyecto.
 2. Ejecuta:
    ```powershell
-   Set-ExecutionPolicy Bypass -Scope Process; .\setup_windows.ps1
+   Set-ExecutionPolicy Bypass -Scope Process; .\scripts\setup_windows.ps1
    ```
 
 #### Linux (Ubuntu 24.04+)
-1. Abre la terminal.
+1. Abre la terminal en la raíz del proyecto.
 2. Ejecuta:
    ```bash
-   chmod +x setup_linux.sh
-   ./setup_linux.sh
+   chmod +x scripts/setup_linux.sh
+   ./scripts/setup_linux.sh
    ```
 
 ## 📖 Análisis de la Práctica (SSOO)

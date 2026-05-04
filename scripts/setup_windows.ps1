@@ -12,10 +12,10 @@ if (!$gccCheck) {
 Write-Host "OK: GCC detectado." -ForegroundColor Green
 
 # 2. Compilar C
-Write-Host "[2/3] Compilando backend en C (reserva_cine.c)..." -ForegroundColor Yellow
-gcc -Wall -Wextra -pthread reserva_cine.c -o reserva_cine.exe
+Write-Host "[2/3] Compilando backend en C..." -ForegroundColor Yellow
+gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine.exe
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "OK: Compilación exitosa. Ejecutable: reserva_cine.exe" -ForegroundColor Green
+    Write-Host "OK: Compilación exitosa. Ejecutable en: src/reserva_cine.exe" -ForegroundColor Green
 } else {
     Write-Host "ERROR: Falló la compilación." -ForegroundColor Red
     exit
@@ -23,8 +23,8 @@ if ($LASTEXITCODE -eq 0) {
 
 # 3. Lanzar Frontend (Opcional)
 Write-Host "[3/3] Preparando visualización..." -ForegroundColor Yellow
-$htmlPath = Join-Path (Get-Location) "index.html"
+$htmlPath = Join-Path (Get-Location) "web\index.html"
 Write-Host "Puedes abrir el frontend manualmente en: $htmlPath" -ForegroundColor Cyan
 
 Write-Host "`n--- Instalación Completada con Éxito ---" -ForegroundColor Green
-Write-Host "Para ejecutar la simulación en terminal: .\reserva_cine.exe"
+Write-Host "Para ejecutar la simulación en terminal: .\src\reserva_cine.exe"

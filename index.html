@@ -1,73 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineSync Pro - Dashboard de Concurrencia</title>
-    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="refresh" content="0; url=web/index.html" />
+    <title>CineSync Pro - Redirecting</title>
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1>Cine<span>Sync Pro</span></h1>
-            <p>Simulador de Concurrencia Avanzado (Sistemas Operativos)</p>
-        </header>
-
-        <main>
-            <section class="controls card">
-                <h2>Parámetros Pro</h2>
-                <div class="control-group">
-                    <label>Estrategia de Bloqueo</label>
-                    <select id="lockStrategy">
-                        <option value="seat">Mutex por Asiento (Eficiente)</option>
-                        <option value="global">Mutex Global (Ineficiente)</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label>Usuarios (Hilos)</label>
-                    <input type="range" id="threadCount" min="1" max="200" value="100">
-                    <span id="threadCountVal">100</span>
-                </div>
-                <div class="control-group">
-                    <label>Latencia de Red (ms)</label>
-                    <input type="range" id="latency" min="0" max="1000" value="100">
-                    <span id="latencyVal">100ms</span>
-                </div>
-                <div class="control-group">
-                    <label>Prioridad Mixta</label>
-                    <input type="checkbox" id="usePriority" checked>
-                    <span class="hint">20% de usuarios son VIP (🌟)</span>
-                </div>
-                <button id="startBtn">Lanzar Simulación</button>
-                <button id="resetBtn" class="secondary">Limpiar Sala</button>
-            </section>
-
-            <section class="cinema-view card">
-                <div class="screen">PANTALLA</div>
-                <div id="seatGrid" class="seat-grid"></div>
-                <div class="legend">
-                    <div class="item"><span class="dot available"></span> Disponible</div>
-                    <div class="item"><span class="dot contested"></span> Mutex Bloqueado</div>
-                    <div class="item"><span class="dot reserved"></span> Reservado</div>
-                </div>
-            </section>
-
-            <section class="stats-view">
-                <div class="stat-card card">
-                    <h3>Reservas</h3>
-                    <p id="successCount">0</p>
-                </div>
-                <div class="stat-card card">
-                    <h3>Colisiones</h3>
-                    <p id="collisionCount">0</p>
-                </div>
-                <div class="stat-card card log-card">
-                    <h3>Actividad del Sistema</h3>
-                    <div id="logContent" class="log-content"></div>
-                </div>
-            </section>
-        </main>
-    </div>
-    <script src="main.js"></script>
+    <p>Redireccionando al dashboard de CineSync... Si no carga, haz <a href="web/index.html">clic aquí</a>.</p>
 </body>
 </html>
