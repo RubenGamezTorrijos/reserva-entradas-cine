@@ -4,6 +4,7 @@ let seats = [];
 let isRunning = false;
 let successCount = 0;
 let collisionCount = 0;
+let globalLock = false;
 
 const grid = document.getElementById('seatGrid');
 const startBtn = document.getElementById('startBtn');
@@ -13,8 +14,11 @@ const successEl = document.getElementById('successCount');
 const collisionEl = document.getElementById('collisionCount');
 const threadInput = document.getElementById('threadCount');
 const threadVal = document.getElementById('threadCountVal');
+const latencyInput = document.getElementById('latency');
+const latencyVal = document.getElementById('latencyVal');
+const lockStrategy = document.getElementById('lockStrategy');
+const usePriority = document.getElementById('usePriority');
 
-// Initialize grid
 function initGrid() {
     grid.innerHTML = '';
     seats = [];
@@ -23,14 +27,8 @@ function initGrid() {
         for (let j = 0; j < COLUMNAS; j++) {
             const el = document.createElement('div');
             el.className = 'seat';
-            el.dataset.row = i;
-            el.dataset.col = j;
             grid.appendChild(el);
-            seats[i][j] = {
-                el: el,
-                isReserved: false,
-                isLocked: false
-            };
+            seats[i][j] = { el: el, isReserved: false, isLocked: false };
         }
     }
 }
@@ -40,52 +38,62 @@ function addLog(msg, type = '') {
     entry.className = `log-entry ${type}`;
     entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
     logContent.prepend(entry);
-    if (logContent.children.length > 50) logContent.lastChild.remove();
+    if (logContent.children.length > 30) logContent.lastChild.remove();
 }
 
-async function simulateUser(id) {
-    const attempts = 5;
-    const speed = 11 - document.getElementById('speed').value;
+async function simulateUser(id, isVIP = false) {
+    const attempts = 10;
+    const latency = parseInt(latencyInput.value);
+    const strategy = lockStrategy.value;
     
+    if (isVIP) await new Promise(r => setTimeout(r, Math.random() * 500));
+    else await new Promise(r => setTimeout(r, 1000 + Math.random() * 2000));
+
     for (let i = 0; i < attempts && isRunning; i++) {
         const r = Math.floor(Math.random() * FILAS);
         const c = Math.floor(Math.random() * COLUMNAS);
         const seat = seats[r][c];
 
-        addLog(`Usuario ${id} intentando asiento [${r}, ${c}]`);
+        addLog(`${isVIP ? '🌟 VIP' : 'User'} ${id} intentando [${r}, ${c}]`);
         
-        // Simular intento (parpadeo rojo si hay competencia)
-        if (seat.isLocked) {
-            seat.el.classList.add('contested');
-            await new Promise(r => setTimeout(r, 200 * speed));
+        let canAccess = false;
+        if (strategy === 'global') {
+            if (!globalLock) {
+                globalLock = true;
+                canAccess = true;
+            }
+        } else {
+            if (!seat.isLocked) {
+                seat.isLocked = true;
+                canAccess = true;
+            }
         }
 
-        // --- SECCIÓN CRÍTICA (Simulada) ---
-        if (!seat.isLocked) {
-            seat.isLocked = true; // Simula pthread_mutex_lock
-            
+        if (canAccess) {
+            seat.el.classList.add('contested');
+            await new Promise(r => setTimeout(r, latency)); 
+
             if (!seat.isReserved) {
-                await new Promise(r => setTimeout(r, 100 * speed)); // Simular procesamiento
                 seat.isReserved = true;
                 seat.el.classList.add('reserved');
                 successCount++;
                 successEl.textContent = successCount;
-                addLog(`Usuario ${id} RESERVÓ [${r}, ${c}]`, 'success');
+                addLog(`${isVIP ? '🌟' : ''} User ${id} RESERVÓ [${r}, ${c}]`, 'success');
             } else {
                 collisionCount++;
                 collisionEl.textContent = collisionCount;
-                addLog(`Usuario ${id} FALLÓ [${r}, ${c}]: Ocupado`, 'fail');
+                addLog(`User ${id} FALLÓ: Ocupado`, 'fail');
             }
             
-            seat.isLocked = false; // Simula pthread_mutex_unlock
+            if (strategy === 'global') globalLock = false;
+            else seat.isLocked = false;
             seat.el.classList.remove('contested');
         } else {
             collisionCount++;
             collisionEl.textContent = collisionCount;
-            addLog(`Usuario ${id} BLOQUEADO [${r}, ${c}]`, 'fail');
+            addLog(`User ${id} BLOQUEADO (Mutex Busy)`, 'fail');
         }
-        
-        await new Promise(r => setTimeout(r, Math.random() * 1000 * speed));
+        await new Promise(r => setTimeout(r, Math.random() * 1000));
     }
 }
 
@@ -93,40 +101,34 @@ async function startSimulation() {
     if (isRunning) return;
     isRunning = true;
     startBtn.disabled = true;
-    startBtn.textContent = 'Simulando...';
+    startBtn.classList.add('running');
+    startBtn.textContent = 'Simulación Pro en curso...';
     
     const count = parseInt(threadInput.value);
     const users = [];
+    const priorityEnabled = usePriority.checked;
+
     for (let i = 0; i < count; i++) {
-        users.push(simulateUser(i));
+        const isVIP = priorityEnabled && (i % 5 === 0);
+        users.push(simulateUser(i, isVIP));
     }
-    
     await Promise.all(users);
     
     isRunning = false;
     startBtn.disabled = false;
-    startBtn.textContent = 'Simulación Completada';
+    startBtn.classList.remove('running');
+    startBtn.textContent = 'Lanzar Simulación';
     addLog('--- Simulación Finalizada ---', 'success');
 }
 
-function reset() {
-    isRunning = false;
-    successCount = 0;
-    collisionCount = 0;
-    successEl.textContent = '0';
-    collisionEl.textContent = '0';
-    logContent.innerHTML = '';
-    startBtn.disabled = false;
-    startBtn.textContent = 'Iniciar Simulación';
-    initGrid();
-}
-
+latencyInput.addEventListener('input', (e) => {
+    latencyVal.textContent = e.target.value + 'ms';
+});
 threadInput.addEventListener('input', (e) => {
     threadVal.textContent = e.target.value;
 });
-
 startBtn.addEventListener('click', startSimulation);
 resetBtn.addEventListener('click', reset);
+function reset() { isRunning = false; successCount = 0; collisionCount = 0; successEl.textContent = '0'; collisionEl.textContent = '0'; logContent.innerHTML = ''; initGrid(); }
 
 initGrid();
-addLog('Sistema listo. Configure parámetros e inicie.');
