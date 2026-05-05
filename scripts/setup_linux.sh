@@ -7,6 +7,7 @@ echo "==============================================="
 echo "   CineSync Pro: Sistema de Reserva de Cine    "
 echo "   Gestion de Concurrencia y Sincronizacion    "
 echo "   Arquitectura MVC - Proyecto Academico       "
+echo "   Version: 1.4.0 (Build Estable)              "
 echo "==============================================="
 
 # Crear carpeta bin si no existe

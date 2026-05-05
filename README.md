@@ -1,24 +1,28 @@
-# CineSync Pro v.1.3.0
+# CineSync Pro v.1.4.0
 
 ## Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
-![Status](https://img.shields.io/badge/Status-Version%201.3.0-blue)
+![Status](https://img.shields.io/badge/Status-Version%201.4.0-blue)
 ![Language](https://img.shields.io/badge/Language-C%20%2F%20JavaScript-orange)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%2F%20Windows-green)
 
 Este proyecto simula un sistema de reserva de entradas de cine de alta concurrencia, implementando mecanismos de sincronización (Semáforos/Mutex) para asegurar la exclusión mutua en el acceso a recursos compartidos (asientos).
 
-## 🚀 Características
-- **Backend en C**: Implementación nativa utilizando `pthreads` y mutexes individuales por asiento.
-- **Frontend Pro**: Dashboard interactivo para visualizar colisiones, latencia de red y estrategias de bloqueo.
-- **Simulación Multi-estrategia**: Compara la eficiencia de un Mutex Global frente a Mutexes Granulares.
-- **Gestión de Prioridades**: Simulación de hilos con prioridades (Usuarios VIP).
+## 🚀 Características (Novedades v.1.4.0)
+- **Backend en C Profesional**: Código refactorizado con gestión eficiente de hilos utilizando `pthreads` y mutexes individuales por asiento.
+- **Arquitectura Web MVC**: Frontend modularizado siguiendo el patrón Modelo-Vista-Controlador para una lógica robusta y escalable.
+- **Interfaz "Ultra Pro"**: Dashboard interactivo con estética moderna (Glassmorphism), pantalla curva con resplandor dinámico y scrollbar personalizada.
+- **Simulación Multi-estrategia**: Compara la eficiencia de un Mutex Global frente a Mutexes Granulares en una sala de 150 asientos.
+- **Monitor de Actividad Realtime**: Log de actividad con priorización de usuarios VIP y estadísticas de colisiones instantáneas.
 
 ## 📂 Estructura del Proyecto (MVC Pattern)
-- **`src/`**: Lógica de negocio y backend en C.
-- **`web/`**: Interfaz de usuario (Vista/Controlador) en HTML/JS.
-- **`scripts/`**: Automatización de compilación y despliegue.
-- **`README.md`**: Documentación principal.
+- **`src/`**: Lógica de negocio y backend en C (Estructura modular).
+- **`web/`**: Interfaz de usuario profesional:
+    - `model/`: Estado y lógica de la simulación.
+    - `view/`: Renderizado del DOM y estilos visuales.
+    - `controller/`: Orquestación de eventos y concurrencia JS.
+- **`scripts/`**: Automatización mejorada de compilación, limpieza y despliegue.
+- **`README.md`**: Documentación principal v.1.4.0.
 
 ## 🛠️ Requisitos e Instalación
 
@@ -26,7 +30,7 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
 - **C**: Compilador GCC (MinGW en Windows o Build-essential en Linux).
 - **Web**: Un navegador moderno (Chrome, Firefox, Edge).
 
-### Implementación Rápida (Scripts)
+### Implementación Rápida (Scripts Mejorados)
 
 #### Windows (PowerShell)
 1. Abre PowerShell en la raíz del proyecto.
@@ -43,30 +47,30 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
    ./scripts/setup_linux.sh
    ```
 
-### 🖥️ Guia de Uso del Lanzador
-Al ejecutar los scripts anteriores, se compilara automaticamente el codigo C y veras el siguiente menu interactivo:
+### 🖥️ Guía de Uso del Lanzador
+Al ejecutar los scripts anteriores, se compilará automáticamente el código C y verás el siguiente menú interactivo:
 
 ```text
 ===============================================
    CineSync Pro: Sistema de Reserva de Cine    
-   Gestion de Concurrencia y Sincronizacion    
+   Gestión de Concurrencia y Sincronización    
 ===============================================
 
-Elija una opcion:
-1. Ejecutar simulacion en Terminal (Codigo C - Hilos reales)
-2. Abrir Aplicacion Web (Simulador Visual Pro)
+Elija una opción:
+1. Ejecutar simulación en Terminal (Código C - Hilos reales)
+2. Abrir Aplicación Web (Simulador Visual Pro MVC)
 3. Salir
 
 Seleccione [1-3]:
 ```
 
-- **Opcion 1**: Ejecuta el binario compilado en C. Es la simulacion tecnica real utilizando la libreria `pthreads` y mutexes granulares. Ideal para verificar el comportamiento de los hilos en consola.
-- **Opcion 2**: Abre la interfaz grafica en el navegador. Es un simulador visual desarrollado para facilitar la comprension de las colisiones y el estado de la sala en tiempo real.
+- **Opción 1**: Ejecuta el binario optimizado en C. Utiliza la librería `pthreads` para simular la reserva real con mutexes granulares.
+- **Opción 2**: Abre el nuevo Dashboard Web Pro. Permite visualizar colisiones, tiempos de ejecución y comportamiento de hilos en una sala interactiva.
 
 ## 📖 Análisis de la Práctica (SSOO)
 El objetivo es demostrar cómo la granularidad del bloqueo afecta al rendimiento:
-- **Mutex por Asiento**: Permite que múltiples hilos reserven diferentes asientos simultáneamente.
-- **Mutex Global**: Convierte el sistema en secuencial, aumentando drásticamente los tiempos de espera y fallos.
+- **Mutex por Asiento (v.1.4.0)**: Permite que múltiples hilos reserven diferentes asientos simultáneamente con mínima latencia.
+- **Mutex Global**: Convierte el sistema en secuencial, provocando cuellos de botella y aumentando los fallos de acceso.
 
 ## 👥 Créditos y Autoría
 - **Desarrollador**: Rubén Gámez Torrijos

@@ -5,6 +5,7 @@ Write-Host "===============================================" -ForegroundColor Cy
 Write-Host "   CineSync Pro: Sistema de Reserva de Cine    " -ForegroundColor Cyan
 Write-Host "   Gestion de Concurrencia y Sincronizacion    " -ForegroundColor Cyan
 Write-Host "   Arquitectura MVC - Proyecto Academico       " -ForegroundColor Cyan
+Write-Host "   Version: 1.4.0 (Build Estable)              " -ForegroundColor Cyan
 Write-Host "===============================================" -ForegroundColor Cyan
 
 # Crear carpeta bin si no existe
