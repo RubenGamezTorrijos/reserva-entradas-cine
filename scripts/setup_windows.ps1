@@ -1,5 +1,9 @@
 # CineSync Pro - Master Setup & Launcher (Windows)
 
+# Forzar ejecucion desde la raiz del proyecto para evitar errores de rutas
+Set-Location $PSScriptRoot
+Set-Location ..
+
 Clear-Host
 Write-Host "===============================================" -ForegroundColor Cyan
 Write-Host "   CineSync Pro: Sistema de Reserva de Cine    " -ForegroundColor Cyan
@@ -14,6 +18,7 @@ if (!(Get-Command gcc -ErrorAction SilentlyContinue)) {
     exit
 }
 
+# Compilar usando rutas relativas seguras desde la raiz
 gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine.exe
 if ($LASTEXITCODE -eq 0) {
     Write-Host "OK: Backend compilado correctamente." -ForegroundColor Green
@@ -36,6 +41,7 @@ do {
     switch ($choice) {
         "1" {
             Write-Host "`nLanzando simulacion en C...`n" -ForegroundColor Green
+            # Ejecutar y esperar a que el usuario presione una tecla antes de cerrar la ventana de C
             Start-Process cmd -ArgumentList "/c src\reserva_cine.exe & pause" -Wait
         }
         "2" {
