@@ -1,6 +1,6 @@
 :root {
-    --bg-color: #0f172a;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --bg-color: #0b1120;
+    --card-bg: #1e293b;
     --primary: #38bdf8;
     --accent: #f97316;
     --danger: #ef4444;
@@ -20,24 +20,23 @@ body {
     background-color: var(--bg-color);
     color: var(--text);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 .app-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 2rem;
 }
 
 header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
-    letter-spacing: -0.05em;
+    color: white;
 }
 
 header h1 span {
@@ -46,189 +45,190 @@ header h1 span {
 
 header p {
     color: var(--text-dim);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
-main {
+/* Rejilla Principal */
+.dashboard-grid {
     display: grid;
     grid-template-columns: 300px 1fr;
-    grid-template-rows: auto auto;
-    gap: 1.5rem;
+    grid-template-rows: auto 1fr auto; /* El log (1fr) ocupara el resto del espacio vertical */
+    grid-template-areas: 
+        "controls cinema"
+        "controls log"
+        "stats stats";
+    gap: 1rem;
+    align-items: stretch; /* Fuerza a que las tarjetas midan lo mismo */
 }
+
+.controls { grid-area: controls; display: flex; flex-direction: column; }
+.cinema-view { grid-area: cinema; min-height: 400px; } /* Altura minima para asegurar visibilidad */
+.log-card { grid-area: log; display: flex; flex-direction: column; }
+.stats-bar { grid-area: stats; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
 .card {
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
+    background: #161e2e;
+    border: 1px solid #2d3748;
+    border-radius: 0.75rem;
     padding: 1.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    height: 100%;
 }
 
+/* Controles */
 .controls h2 {
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
-    font-size: 1.25rem;
 }
 
 .control-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .control-group label {
     display: block;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--text-dim);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+select {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid #2d3748;
+    color: white;
+    padding: 0.4rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
 }
 
 input[type="range"] {
     width: 100%;
-    accent-color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.control-group span {
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 button {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.7rem;
     border-radius: 0.5rem;
     border: none;
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
 }
 
-button:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
+#startBtn {
+    background: #38bdf8;
+    color: #0b1120;
 }
 
-button.secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+#resetBtn {
+    background: #252f3f;
+    color: white;
+    border: 1px solid #374151;
 }
 
-.cinema-view {
-    grid-row: span 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Pantalla y Sala */
 .screen {
     width: 80%;
-    height: 10px;
-    background: linear-gradient(to bottom, var(--primary), transparent);
-    margin: 1rem 0 3rem;
+    height: 8px;
+    background: linear-gradient(to bottom, #38bdf8, transparent);
+    margin: 1rem auto 4rem auto;
     border-radius: 50% / 100% 100% 0 0;
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--primary);
     filter: blur(1px);
+    box-shadow: 0 -5px 15px rgba(56, 189, 248, 0.4);
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.screen::after {
+    content: 'PANTALLA';
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #38bdf8;
+    opacity: 0.6;
 }
 
 .seat-grid {
     display: grid;
-    grid-template-columns: repeat(15, 1fr);
+    grid-template-columns: repeat(15, 24px); /* Tamaño exacto de la imagen */
+    justify-content: center;
     gap: 8px;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
 }
 
 .seat {
     width: 24px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 4px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s;
 }
 
-.seat.reserved {
-    background: var(--accent);
-    box-shadow: 0 0 15px var(--accent);
-    border-color: transparent;
+.seat:hover {
+    border-color: var(--primary);
 }
 
-.seat.contested {
-    background: var(--danger);
-    animation: pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); opacity: 1; }
-    to { transform: scale(1.2); opacity: 0.7; }
-}
+.seat.reserved { background: #f97316; box-shadow: 0 0 10px #f97316; }
+.seat.contested { background: #ef4444; }
 
 .legend {
     display: flex;
-    gap: 1.5rem;
-    font-size: 0.8rem;
+    gap: 1rem;
+    font-size: 0.75rem;
     color: var(--text-dim);
 }
 
-.legend .item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+.legend .item { display: flex; align-items: center; gap: 0.4rem; }
+.dot { width: 12px; height: 12px; border-radius: 2px; }
+.dot.available { background: #2d3748; }
+.dot.contested { background: #ef4444; }
+.dot.reserved { background: #f97316; }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-}
-
-.dot.available { background: rgba(255, 255, 255, 0.2); }
-.dot.contested { background: var(--danger); }
-.dot.reserved { background: var(--accent); }
-
-.stats-view {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    gap: 1.5rem;
-}
-
+/* Stats Bar */
 .stat-card h3 {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+}
+
+.stat-card p {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+/* Log */
+.log-card h3 {
+    font-size: 0.8rem;
     color: var(--text-dim);
     margin-bottom: 0.5rem;
 }
 
-.stat-card p {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.log-card {
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-}
-
 .log-content {
-    flex: 1;
+    height: 110px;
     overflow-y: auto;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    padding-top: 0.5rem;
-}
-
-.log-entry {
-    margin-bottom: 2px;
+    font-size: 0.7rem;
+    color: #64748b;
+    font-family: monospace;
 }
 
 .log-entry.success { color: var(--success); }
 .log-entry.fail { color: var(--danger); }
 
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "controls" "cinema" "log" "stats";
+    }
+    .stats-bar { grid-template-columns: 1fr; }
 }

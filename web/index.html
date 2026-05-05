@@ -13,7 +13,8 @@
             <p>Simulador de Concurrencia Avanzado (Sistemas Operativos)</p>
         </header>
 
-        <main>
+        <main class="dashboard-grid">
+            <!-- SECCIÓN IZQUIERDA: CONTROLES -->
             <section class="controls card">
                 <h2>Parámetros Pro</h2>
                 <div class="control-group">
@@ -47,8 +48,9 @@
                 <button id="resetBtn" class="secondary">Limpiar Sala</button>
             </section>
 
+            <!-- SECCIÓN DERECHA SUPERIOR: CINE -->
             <section class="cinema-view card">
-                <div class="screen">PANTALLA</div>
+                <div class="screen"></div>
                 <div id="seatGrid" class="seat-grid"></div>
                 <div class="legend">
                     <div class="item"><span class="dot available"></span> Disponible</div>
@@ -57,7 +59,14 @@
                 </div>
             </section>
 
-            <section class="stats-view">
+            <!-- SECCIÓN DERECHA INFERIOR: LOG (Mismo ancho que Cine) -->
+            <section class="log-card card">
+                <h3>Actividad del Sistema</h3>
+                <div id="logContent" class="log-content"></div>
+            </section>
+
+            <!-- SECCIÓN INFERIOR: ESTADÍSTICAS -->
+            <section class="stats-bar">
                 <div class="stat-card card">
                     <h3>Reservas</h3>
                     <p id="successCount">0</p>
@@ -70,14 +79,9 @@
                     <h3>Tiempo Total</h3>
                     <p id="executionTime">0 ms</p>
                 </div>
-                <div class="stat-card card log-card">
-                    <h3>Actividad del Sistema</h3>
-                    <div id="logContent" class="log-content"></div>
-                </div>
             </section>
         </main>
     </div>
-    <!-- Carga del controlador como modulo ES6 -->
-    <script type="module" src="controller/simulation_controller.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
