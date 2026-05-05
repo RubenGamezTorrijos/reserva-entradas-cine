@@ -49,9 +49,10 @@ El objetivo es demostrar cómo la granularidad del bloqueo afecta al rendimiento
 ## 👥 Créditos y Autoría
 - **Desarrollador**: Rubén Gámez Torrijos
 - **Asignatura**: Sistemas Operativos (SS.OO.)
-- **Profesor**: Diego
-- **Universidad**: Universidad Europea de Madrid (UEM)
+- **Profesor**: Diego Ramírez
+- **Curso**: 2025/2026
 - **Grado**: Ingeniería Informática
+- **Universidad**: Universidad Europea de Madrid (UEM)
 
 ---
 *Este proyecto es parte de una actividad académica para el estudio de hilos, secciones críticas y exclusión mutua.*
