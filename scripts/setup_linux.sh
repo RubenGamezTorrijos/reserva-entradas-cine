@@ -29,7 +29,7 @@ echo -e "\n\033[0;33m[2/2] Instalacion lista. ¿Que deseas ejecutar?\033[0m"
 while true; do
     echo -e "\n\033[0;36mElija una opcion:\033[0m"
     echo "1. Ejecutar simulacion en Terminal (Codigo C - Hilos reales)"
-    echo "2. Abrir Dashboard Web (Simulador Visual Pro)"
+    echo "2. Abrir Aplicacion Web (Simulador Visual Pro)"
     echo "3. Salir"
     
     read -p "Seleccione [1-3]: " choice

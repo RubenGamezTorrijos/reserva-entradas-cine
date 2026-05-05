@@ -51,7 +51,7 @@ do {
             }
         }
         "2" {
-            Write-Host "`nAbrimiento Dashboard en el navegador..." -ForegroundColor Green
+            Write-Host "`nAbriendo Aplicación Web en el navegador..." -ForegroundColor Green
             Start-Process "web\index.html"
         }
         "3" {
