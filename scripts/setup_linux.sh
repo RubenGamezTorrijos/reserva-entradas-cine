@@ -5,10 +5,10 @@
 clear
 echo -e "\033[0;36m===============================================\033[0m"
 echo -e "\033[0;36m   CineSync Pro: Sistema de Reserva de Cine    \033[0m"
-echo -e "\033[0;36m   Gestión de Concurrencia y Sincronización    \033[0m"
+echo -e "\033[0;36m   Gestion de Concurrencia y Sincronizacion    \033[0m"
 echo -e "\033[0;36m===============================================\033[0m"
 
-# 1. Compilación Automática
+# 1. Compilacion Automatica
 echo -e "\n\033[0;33m[1/2] Preparando Backend en C...\033[0m"
 if ! command -v gcc &> /dev/null; then
     echo -e "\033[0;31mERROR: GCC no instalado. Instalando build-essential...\033[0m"
@@ -19,16 +19,16 @@ gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine
 if [ $? -eq 0 ]; then
     echo -e "\033[0;32mOK: Backend compilado correctamente.\033[0m"
 else
-    echo -e "\033[0;31mERROR: Falló la compilación del código C.\033[0m"
+    echo -e "\033[0;31mERROR: Fallo la compilacion del codigo C.\033[0m"
     exit 1
 fi
 
-# 2. Menú Interactivo
-echo -e "\n\033[0;33m[2/2] Instalación lista. ¿Qué deseas ejecutar?\033[0m"
+# 2. Menu Interactivo
+echo -e "\n\033[0;33m[2/2] Instalacion lista. ¿Que deseas ejecutar?\033[0m"
 
 while true; do
-    echo -e "\n\033[0;36mElija una opción:\033[0m"
-    echo "1. Ejecutar simulación en Terminal (Código C - Hilos reales)"
+    echo -e "\n\033[0;36mElija una opcion:\033[0m"
+    echo "1. Ejecutar simulacion en Terminal (Codigo C - Hilos reales)"
     echo "2. Abrir Dashboard Web (Simulador Visual Pro)"
     echo "3. Salir"
     
@@ -36,13 +36,13 @@ while true; do
     
     case $choice in
         1)
-            echo -e "\n\033[0;32mLanzando simulación en C...\033[0m\n"
+            echo -e "\n\033[0;32mLanzando simulacion en C...\033[0m\n"
             ./src/reserva_cine
-            echo -e "\nPresione Enter para volver al menú..."
+            echo -e "\nPresione Enter para volver al menu..."
             read
             ;;
         2)
-            echo -e "\n\033[0;32mAbrimiento Dashboard... Si no abre automáticamente, usa web/index.html\033[0m"
+            echo -e "\n\033[0;32mAbrimiento Dashboard... Si no abre automaticamente, usa web/index.html\033[0m"
             xdg-open web/index.html || open web/index.html || echo "Por favor, abre manualmente: web/index.html"
             ;;
         3)
@@ -50,7 +50,7 @@ while true; do
             break
             ;;
         *)
-            echo -e "\033[0;31mOpción no válida.\033[0m"
+            echo -e "\033[0;31mOpcion no valida.\033[0m"
             ;;
     esac
 done

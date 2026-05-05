@@ -27,12 +27,12 @@ typedef struct {
 // Sala de cine
 Asiento sala[FILAS][COLUMNAS];
 
-// Estadísticas globales
+// Estadisticas globales
 int reservas_exitosas = 0;
 int colisiones_detectadas = 0;
 pthread_mutex_t stats_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-// Función para inicializar la sala
+// Funcion para inicializar la sala
 void inicializar_sala() {
     for (int i = 0; i < FILAS; i++) {
         for (int j = 0; j < COLUMNAS; j++) {
@@ -45,7 +45,7 @@ void inicializar_sala() {
     }
 }
 
-// Función para limpiar recursos
+// Funcion para limpiar recursos
 void limpiar_sala() {
     for (int i = 0; i < FILAS; i++) {
         for (int j = 0; j < COLUMNAS; j++) {
@@ -54,7 +54,7 @@ void limpiar_sala() {
     }
 }
 
-// Función que ejecutan los hilos (simulación de usuario)
+// Funcion que ejecutan los hilos (simulacion de usuario)
 void* simular_usuario(void* arg) {
     UsuarioData* data = (UsuarioData*)arg;
     int id_usuario = data->id;
@@ -71,7 +71,7 @@ void* simular_usuario(void* arg) {
         pthread_mutex_lock(&sala[f][c].mutex);
 
         if (!sala[f][c].estaReservado) {
-            // Simular un pequeño retardo en el proceso de reserva
+            // Simular un pequeno retardo en el proceso de reserva
             usleep((rand() % 10) * 1000); 
 
             sala[f][c].estaReservado = true;
@@ -81,19 +81,19 @@ void* simular_usuario(void* arg) {
             reservas_exitosas++;
             pthread_mutex_unlock(&stats_mutex);
 
-            printf("Usuario %d RESERVÓ con éxito el asiento [%d, %d]\n", id_usuario, f, c);
+            printf("Usuario %d RESERVO con exito el asiento [%d, %d]\n", id_usuario, f, c);
         } else {
             pthread_mutex_lock(&stats_mutex);
             colisiones_detectadas++;
             pthread_mutex_unlock(&stats_mutex);
             
-            printf("Usuario %d FALLÓ: El asiento [%d, %d] ya está ocupado por Usuario %d\n", 
+            printf("Usuario %d FALLO: El asiento [%d, %d] ya esta ocupado por Usuario %d\n", 
                    id_usuario, f, c, sala[f][c].usuarioID);
         }
 
         pthread_mutex_unlock(&sala[f][c].mutex);
 
-        // Pequeña pausa entre intentos
+        // Pequena pausa entre intentos
         usleep((rand() % 50) * 1000);
     }
 
@@ -128,7 +128,7 @@ int main() {
     pthread_t hilos[NUM_USUARIOS];
     clock_t start_time = clock();
 
-    printf("Iniciando simulación con %d usuarios...\n", NUM_USUARIOS);
+    printf("Iniciando simulacion con %d usuarios...\n", NUM_USUARIOS);
 
     for (int i = 0; i < NUM_USUARIOS; i++) {
         UsuarioData* data = malloc(sizeof(UsuarioData));
@@ -148,7 +148,7 @@ int main() {
 
     mostrar_estado_sala();
 
-    printf("\n--- RESULTADOS DE LA SIMULACIÓN ---\n");
+    printf("\n--- RESULTADOS DE LA SIMULACION ---\n");
     printf("Usuarios simulados:    %d\n", NUM_USUARIOS);
     printf("Intentos totales:      %d\n", NUM_USUARIOS * INTENTOS_POR_USUARIO);
     printf("Reservas exitosas:     %d\n", reservas_exitosas);
