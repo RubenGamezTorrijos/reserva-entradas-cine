@@ -11,3 +11,39 @@ dist/
 # Brain/Artifacts (Optional, but usually good to keep outside of the main repo if they are just logs)
 brain/
 .gemini/
+
+# Environment variables
+.env
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+temp/
+
+# Distribution files
+dist/
+build/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook cache files
+.ipynb_checkpoints
+
+# Directorios Plan
+plan/*
