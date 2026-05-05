@@ -4,7 +4,11 @@ Clear-Host
 Write-Host "===============================================" -ForegroundColor Cyan
 Write-Host "   CineSync Pro: Sistema de Reserva de Cine    " -ForegroundColor Cyan
 Write-Host "   Gestion de Concurrencia y Sincronizacion    " -ForegroundColor Cyan
+Write-Host "   Arquitectura MVC - Proyecto Academico       " -ForegroundColor Cyan
 Write-Host "===============================================" -ForegroundColor Cyan
+
+# Crear carpeta bin si no existe
+if (!(Test-Path "bin")) { New-Item -ItemType Directory -Path "bin" | Out-Null }
 
 # 1. Compilacion Automatica
 Write-Host "`n[1/2] Preparando Backend en C..." -ForegroundColor Yellow
@@ -14,19 +18,20 @@ if (!(Get-Command gcc -ErrorAction SilentlyContinue)) {
     exit
 }
 
-# Intentar compilar con diferentes flags comunes en Windows
-Write-Host "Compilando src/reserva_cine.c..." -ForegroundColor Gray
-gcc -Wall -Wextra src/reserva_cine.c -o src/reserva_cine.exe -lpthread
+Write-Host "Compilando modulos MVC..." -ForegroundColor Gray
+$gccCmd = "gcc src/main.c src/model/cinema_model.c src/view/terminal_view.c src/controller/simulation_controller.c -o bin/reserva_cine.exe -lpthread"
+Invoke-Expression $gccCmd
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "Reintentando con flags alternativos..." -ForegroundColor Gray
-    gcc -Wall -Wextra src/reserva_cine.c -o src/reserva_cine.exe -pthread
+    Write-Host "Reintentando con flag -pthread..." -ForegroundColor Gray
+    $gccCmd = "gcc src/main.c src/model/cinema_model.c src/view/terminal_view.c src/controller/simulation_controller.c -o bin/reserva_cine.exe -pthread"
+    Invoke-Expression $gccCmd
 }
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "OK: Backend compilado correctamente." -ForegroundColor Green
+    Write-Host "OK: Backend compilado correctamente en bin/reserva_cine.exe" -ForegroundColor Green
 } else {
-    Write-Host "ERROR: Fallo la compilacion. Asegurate de tener instalada la libreria pthreads." -ForegroundColor Red
+    Write-Host "ERROR: Fallo la compilacion." -ForegroundColor Red
     pause
     exit
 }
@@ -43,7 +48,7 @@ do {
     
     switch ($choice) {
         "1" {
-            if (Test-Path "src/reserva_cine.exe") {
+            if (Test-Path "bin/reserva_cine.exe") {
                 Write-Host "`n--- CONFIGURACION DE ESTRESS ---" -ForegroundColor Yellow
                 $u = Read-Host "Numero de usuarios [Default 100]"
                 $i = Read-Host "Intentos por usuario [Default 2]"
@@ -52,9 +57,9 @@ do {
                 if ([string]::IsNullOrWhiteSpace($i)) { $i = "2" }
 
                 Write-Host "`nLanzando simulacion con $u usuarios y $i intentos...`n" -ForegroundColor Green
-                Start-Process cmd -ArgumentList "/c src\reserva_cine.exe $u $i & pause" -Wait
+                Start-Process cmd -ArgumentList "/c bin\reserva_cine.exe $u $i & pause" -Wait
             } else {
-                Write-Host "ERROR: No se encuentra el ejecutable." -ForegroundColor Red
+                Write-Host "ERROR: No se encuentra el ejecutable en bin/" -ForegroundColor Red
             }
         }
         "2" {

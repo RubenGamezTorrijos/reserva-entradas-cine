@@ -66,6 +66,10 @@
                     <h3>Colisiones</h3>
                     <p id="collisionCount">0</p>
                 </div>
+                <div class="stat-card card highlight">
+                    <h3>Tiempo Total</h3>
+                    <p id="executionTime">0.00s</p>
+                </div>
                 <div class="stat-card card log-card">
                     <h3>Actividad del Sistema</h3>
                     <div id="logContent" class="log-content"></div>
@@ -73,6 +77,7 @@
             </section>
         </main>
     </div>
-    <script src="main.js"></script>
+    <!-- Carga del controlador como modulo ES6 -->
+    <script type="module" src="controller/simulation_controller.js"></script>
 </body>
 </html>
