@@ -58,8 +58,6 @@ void limpiar_sala() {
 void* simular_usuario(void* arg) {
     UsuarioData* data = (UsuarioData*)arg;
     int id_usuario = data->id;
-    unsigned int seed = time(NULL) ^ (id_usuario << 16);
-
     for (int i = 0; i < INTENTOS_POR_USUARIO; i++) {
         // Seleccionar un asiento aleatorio
         int f = rand() % FILAS;

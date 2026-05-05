@@ -2,9 +2,6 @@
 
 # CineSync Pro - Master Setup & Launcher (Linux)
 
-# Forzar ejecucion desde la raiz del proyecto para evitar errores de rutas
-cd "$(dirname "$0")/.."
-
 clear
 echo -e "\033[0;36m===============================================\033[0m"
 echo -e "\033[0;36m   CineSync Pro: Sistema de Reserva de Cine    \033[0m"

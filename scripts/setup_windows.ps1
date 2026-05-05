@@ -1,9 +1,5 @@
 # CineSync Pro - Master Setup & Launcher (Windows)
 
-# Forzar ejecucion desde la raiz del proyecto para evitar errores de rutas
-Set-Location $PSScriptRoot
-Set-Location ..
-
 Clear-Host
 Write-Host "===============================================" -ForegroundColor Cyan
 Write-Host "   CineSync Pro: Sistema de Reserva de Cine    " -ForegroundColor Cyan
@@ -18,17 +14,24 @@ if (!(Get-Command gcc -ErrorAction SilentlyContinue)) {
     exit
 }
 
-# Compilar usando rutas relativas seguras desde la raiz
-gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine.exe
+# Intentar compilar con diferentes flags comunes en Windows
+Write-Host "Compilando src/reserva_cine.c..." -ForegroundColor Gray
+gcc -Wall -Wextra src/reserva_cine.c -o src/reserva_cine.exe -lpthread
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Reintentando con flags alternativos..." -ForegroundColor Gray
+    gcc -Wall -Wextra src/reserva_cine.c -o src/reserva_cine.exe -pthread
+}
+
 if ($LASTEXITCODE -eq 0) {
     Write-Host "OK: Backend compilado correctamente." -ForegroundColor Green
 } else {
-    Write-Host "ERROR: Fallo la compilacion del codigo C." -ForegroundColor Red
+    Write-Host "ERROR: Fallo la compilacion. Asegurate de tener instalada la libreria pthreads." -ForegroundColor Red
     pause
     exit
 }
 
-# 2. Menú Interactivo
+# 2. Menu Interactivo
 Write-Host "`n[2/2] Instalacion lista. ¿Que deseas ejecutar?" -ForegroundColor Yellow
 do {
     Write-Host "`nElija una opcion:" -ForegroundColor Cyan
@@ -40,9 +43,12 @@ do {
     
     switch ($choice) {
         "1" {
-            Write-Host "`nLanzando simulacion en C...`n" -ForegroundColor Green
-            # Ejecutar y esperar a que el usuario presione una tecla antes de cerrar la ventana de C
-            Start-Process cmd -ArgumentList "/c src\reserva_cine.exe & pause" -Wait
+            if (Test-Path "src/reserva_cine.exe") {
+                Write-Host "`nLanzando simulacion en C...`n" -ForegroundColor Green
+                Start-Process cmd -ArgumentList "/c src\reserva_cine.exe & pause" -Wait
+            } else {
+                Write-Host "ERROR: No se encuentra el ejecutable." -ForegroundColor Red
+            }
         }
         "2" {
             Write-Host "`nAbrimiento Dashboard en el navegador..." -ForegroundColor Green
