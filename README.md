@@ -27,19 +27,39 @@ Este proyecto simula un sistema de reserva de entradas de cine de alta concurren
 ### Implementación Rápida (Scripts)
 
 #### Windows (PowerShell)
-1. Abre PowerShell como administrador en la raíz del proyecto.
+1. Abre PowerShell en la raíz del proyecto.
 2. Ejecuta:
    ```powershell
    Set-ExecutionPolicy Bypass -Scope Process; .\scripts\setup_windows.ps1
    ```
 
-#### Linux (Ubuntu 24.04+)
+#### Linux (Bash)
 1. Abre la terminal en la raíz del proyecto.
 2. Ejecuta:
    ```bash
    chmod +x scripts/setup_linux.sh
    ./scripts/setup_linux.sh
    ```
+
+### 🖥️ Guia de Uso del Lanzador
+Al ejecutar los scripts anteriores, se compilara automaticamente el codigo C y veras el siguiente menu interactivo:
+
+```text
+===============================================
+   CineSync Pro: Sistema de Reserva de Cine    
+   Gestion de Concurrencia y Sincronizacion    
+===============================================
+
+Elija una opcion:
+1. Ejecutar simulacion en Terminal (Codigo C - Hilos reales)
+2. Abrir Aplicacion Web (Simulador Visual Pro)
+3. Salir
+
+Seleccione [1-3]:
+```
+
+- **Opcion 1**: Ejecuta el binario compilado en C. Es la simulacion tecnica real utilizando la libreria `pthreads` y mutexes granulares. Ideal para verificar el comportamiento de los hilos en consola.
+- **Opcion 2**: Abre la interfaz grafica en el navegador. Es un simulador visual desarrollado para facilitar la comprension de las colisiones y el estado de la sala en tiempo real.
 
 ## 📖 Análisis de la Práctica (SSOO)
 El objetivo es demostrar cómo la granularidad del bloqueo afecta al rendimiento:
