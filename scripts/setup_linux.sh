@@ -1,32 +1,56 @@
 #!/bin/bash
 
-# CineSync Setup Script for Ubuntu 24.04+
+# CineSync Pro - Master Setup & Launcher (Linux)
 
-echo -e "\033[0;36m--- Iniciando Instalación de CineSync Pro (Linux) ---\033[0m"
+clear
+echo -e "\033[0;36m===============================================\033[0m"
+echo -e "\033[0;36m   CineSync Pro: Sistema de Reserva de Cine    \033[0m"
+echo -e "\033[0;36m   Gestión de Concurrencia y Sincronización    \033[0m"
+echo -e "\033[0;36m===============================================\033[0m"
 
-# 1. Instalar dependencias si faltan
-echo -e "\033[0;33m[1/3] Comprobando dependencias...\033[0m"
-if ! command -v gcc &> /dev/null
-then
-    echo "Instalando build-essential..."
+# 1. Compilación Automática
+echo -e "\n\033[0;33m[1/2] Preparando Backend en C...\033[0m"
+if ! command -v gcc &> /dev/null; then
+    echo -e "\033[0;31mERROR: GCC no instalado. Instalando build-essential...\033[0m"
     sudo apt update && sudo apt install -y build-essential
-else
-    echo "OK: GCC ya instalado."
 fi
 
-# 2. Compilar C
-echo -e "\033[0;33m[2/3] Compilando backend en C...\033[0m"
 gcc -Wall -Wextra -pthread src/reserva_cine.c -o src/reserva_cine
 if [ $? -eq 0 ]; then
-    echo -e "\033[0;32mOK: Compilación exitosa. Ejecutable: ./src/reserva_cine\033[0m"
+    echo -e "\033[0;32mOK: Backend compilado correctamente.\033[0m"
 else
-    echo -e "\033[0;31mERROR: Falló la compilación.\033[0m"
+    echo -e "\033[0;31mERROR: Falló la compilación del código C.\033[0m"
     exit 1
 fi
 
-# 3. Instrucciones Frontend
-echo -e "\033[0;33m[3/3] Frontend listo.\033[0m"
-echo "Para visualizar el dashboard, abre 'web/index.html' en tu navegador."
+# 2. Menú Interactivo
+echo -e "\n\033[0;33m[2/2] Instalación lista. ¿Qué deseas ejecutar?\033[0m"
 
-echo -e "\n\033[0;32m--- Instalación Completada ---\033[0m"
-echo "Ejecuta './src/reserva_cine' para iniciar la simulación en terminal."
+while true; do
+    echo -e "\n\033[0;36mElija una opción:\033[0m"
+    echo "1. Ejecutar simulación en Terminal (Código C - Hilos reales)"
+    echo "2. Abrir Dashboard Web (Simulador Visual Pro)"
+    echo "3. Salir"
+    
+    read -p "Seleccione [1-3]: " choice
+    
+    case $choice in
+        1)
+            echo -e "\n\033[0;32mLanzando simulación en C...\033[0m\n"
+            ./src/reserva_cine
+            echo -e "\nPresione Enter para volver al menú..."
+            read
+            ;;
+        2)
+            echo -e "\n\033[0;32mAbrimiento Dashboard... Si no abre automáticamente, usa web/index.html\033[0m"
+            xdg-open web/index.html || open web/index.html || echo "Por favor, abre manualmente: web/index.html"
+            ;;
+        3)
+            echo -e "\n\033[0;33mSaliendo... Gracias por usar CineSync Pro.\033[0m"
+            break
+            ;;
+        *)
+            echo -e "\033[0;31mOpción no válida.\033[0m"
+            ;;
+    esac
+done
