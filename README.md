@@ -1,6 +1,5 @@
 # CineSync Pro v.1.4.0
-
-![Portada CineSync Pro](capturas/Captura_Portada_CineSync_Pro_v.1.4.0.jpg)
+<img width="1722" height="1276" alt="CineSyncPro_Animado_GI_FHDF_20260505_194200" src="https://github.com/user-attachments/assets/6b7b1432-18a6-4b5b-8e0f-f276fdb323eb" />
 
 ## Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
