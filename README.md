@@ -1,4 +1,6 @@
-# Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
+# CineSync Pro v.1.3.0
+
+## Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
 ![Status](https://img.shields.io/badge/Status-Version%201.3.0-blue)
 ![Language](https://img.shields.io/badge/Language-C%20%2F%20JavaScript-orange)
