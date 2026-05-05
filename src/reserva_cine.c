@@ -7,8 +7,10 @@
 
 #define FILAS 10
 #define COLUMNAS 15
-#define NUM_USUARIOS 100
-#define INTENTOS_POR_USUARIO 20
+
+// Valores por defecto
+int num_usuarios = 100;
+int intentos_por_usuario = 2;
 
 // Estructura para representar un asiento
 typedef struct {
@@ -58,7 +60,7 @@ void limpiar_sala() {
 void* simular_usuario(void* arg) {
     UsuarioData* data = (UsuarioData*)arg;
     int id_usuario = data->id;
-    for (int i = 0; i < INTENTOS_POR_USUARIO; i++) {
+    for (int i = 0; i < intentos_por_usuario; i++) {
         // Seleccionar un asiento aleatorio
         int f = rand() % FILAS;
         int c = rand() % COLUMNAS;
@@ -119,16 +121,25 @@ void mostrar_estado_sala() {
     printf("-------------------------------\n");
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     srand(time(NULL));
+    
+    // Parsear argumentos si existen
+    if (argc > 1) num_usuarios = atoi(argv[1]);
+    if (argc > 2) intentos_por_usuario = atoi(argv[2]);
+
+    // Validaciones basicas
+    if (num_usuarios <= 0) num_usuarios = 100;
+    if (intentos_por_usuario <= 0) intentos_por_usuario = 2;
+
     inicializar_sala();
 
-    pthread_t hilos[NUM_USUARIOS];
+    pthread_t hilos[num_usuarios];
     clock_t start_time = clock();
 
-    printf("Iniciando simulacion con %d usuarios...\n", NUM_USUARIOS);
+    printf("Iniciando simulacion con %d usuarios y %d intentos c/u...\n", num_usuarios, intentos_por_usuario);
 
-    for (int i = 0; i < NUM_USUARIOS; i++) {
+    for (int i = 0; i < num_usuarios; i++) {
         UsuarioData* data = malloc(sizeof(UsuarioData));
         data->id = i;
         if (pthread_create(&hilos[i], NULL, simular_usuario, data) != 0) {
@@ -137,7 +148,7 @@ int main() {
         }
     }
 
-    for (int i = 0; i < NUM_USUARIOS; i++) {
+    for (int i = 0; i < num_usuarios; i++) {
         pthread_join(hilos[i], NULL);
     }
 
@@ -147,8 +158,8 @@ int main() {
     mostrar_estado_sala();
 
     printf("\n--- RESULTADOS DE LA SIMULACION ---\n");
-    printf("Usuarios simulados:    %d\n", NUM_USUARIOS);
-    printf("Intentos totales:      %d\n", NUM_USUARIOS * INTENTOS_POR_USUARIO);
+    printf("Usuarios simulados:    %d\n", num_usuarios);
+    printf("Intentos totales:      %d\n", num_usuarios * intentos_por_usuario);
     printf("Reservas exitosas:     %d\n", reservas_exitosas);
     printf("Colisiones (fallos):   %d\n", colisiones_detectadas);
     printf("Tiempo total:          %.4f segundos\n", time_spent);

@@ -36,7 +36,7 @@ Write-Host "`n[2/2] Instalacion lista. ¿Que deseas ejecutar?" -ForegroundColor 
 do {
     Write-Host "`nElija una opcion:" -ForegroundColor Cyan
     Write-Host "1. Ejecutar simulacion en Terminal (Codigo C - Hilos reales)"
-    Write-Host "2. Abrir Dashboard Web (Simulador Visual Pro)"
+    Write-Host "2. Abrir Aplicacion Web (Simulador Visual Pro)"
     Write-Host "3. Salir"
     
     $choice = Read-Host "Seleccione [1-3]"
@@ -44,14 +44,21 @@ do {
     switch ($choice) {
         "1" {
             if (Test-Path "src/reserva_cine.exe") {
-                Write-Host "`nLanzando simulacion en C...`n" -ForegroundColor Green
-                Start-Process cmd -ArgumentList "/c src\reserva_cine.exe & pause" -Wait
+                Write-Host "`n--- CONFIGURACION DE ESTRESS ---" -ForegroundColor Yellow
+                $u = Read-Host "Numero de usuarios [Default 100]"
+                $i = Read-Host "Intentos por usuario [Default 2]"
+                
+                if ([string]::IsNullOrWhiteSpace($u)) { $u = "100" }
+                if ([string]::IsNullOrWhiteSpace($i)) { $i = "2" }
+
+                Write-Host "`nLanzando simulacion con $u usuarios y $i intentos...`n" -ForegroundColor Green
+                Start-Process cmd -ArgumentList "/c src\reserva_cine.exe $u $i & pause" -Wait
             } else {
                 Write-Host "ERROR: No se encuentra el ejecutable." -ForegroundColor Red
             }
         }
         "2" {
-            Write-Host "`nAbriendo Aplicación Web en el navegador..." -ForegroundColor Green
+            Write-Host "`nAbriendo Aplicacion Web en el navegador..." -ForegroundColor Green
             Start-Process "web\index.html"
         }
         "3" {

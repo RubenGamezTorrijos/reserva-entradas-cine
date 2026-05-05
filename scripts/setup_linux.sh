@@ -36,8 +36,15 @@ while true; do
     
     case $choice in
         1)
-            echo -e "\n\033[0;32mLanzando simulacion en C...\033[0m\n"
-            ./src/reserva_cine
+            echo -e "\n\033[0;33m--- CONFIGURACION DE ESTRESS ---\033[0m"
+            read -p "Numero de usuarios [Default 100]: " u
+            read -p "Intentos por usuario [Default 2]: " i
+            
+            u=${u:-100}
+            i=${i:-2}
+
+            echo -e "\n\033[0;32mLanzando simulacion con $u usuarios y $i intentos...\033[0m\n"
+            ./src/reserva_cine $u $i
             echo -e "\nPresione Enter para volver al menu..."
             read
             ;;

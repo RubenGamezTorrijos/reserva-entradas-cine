@@ -18,6 +18,8 @@ const latencyInput = document.getElementById('latency');
 const latencyVal = document.getElementById('latencyVal');
 const lockStrategy = document.getElementById('lockStrategy');
 const usePriority = document.getElementById('usePriority');
+const attemptsInput = document.getElementById('attemptsCount');
+const attemptsVal = document.getElementById('attemptsVal');
 
 function initGrid() {
     grid.innerHTML = '';
@@ -42,7 +44,7 @@ function addLog(msg, type = '') {
 }
 
 async function simulateUser(id, isVIP = false) {
-    const attempts = 10;
+    const attempts = parseInt(attemptsInput.value);
     const latency = parseInt(latencyInput.value);
     const strategy = lockStrategy.value;
     
@@ -126,6 +128,9 @@ latencyInput.addEventListener('input', (e) => {
 });
 threadInput.addEventListener('input', (e) => {
     threadVal.textContent = e.target.value;
+});
+attemptsInput.addEventListener('input', (e) => {
+    attemptsVal.textContent = e.target.value;
 });
 startBtn.addEventListener('click', startSimulation);
 resetBtn.addEventListener('click', reset);
