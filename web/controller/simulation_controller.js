@@ -124,7 +124,7 @@ class SimulationController {
     reset() {
         this.model.reset();
         this.seatElements = this.view.renderGrid(FILAS, COLUMNAS);
-        this.view.updateStats(0, 0, '0.00');
+        this.view.updateStats(0, 0, '0');
         this.view.logContent.innerHTML = '';
         this.view.setRunningState(false);
     }

@@ -44,7 +44,7 @@ export class SimulationView {
     updateStats(success, collisions, time) {
         this.successEl.textContent = success;
         this.collisionEl.textContent = collisions;
-        if (this.timeEl) this.timeEl.textContent = time + 's';
+        if (this.timeEl) this.timeEl.textContent = time + ' ms';
     }
 
     setRunningState(running) {
