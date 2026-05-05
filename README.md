@@ -1,5 +1,7 @@
 # CineSync Pro v.1.4.0
 
+![Portada CineSync Pro](capturas/Captura_Portada_CineSync_Pro_v.1.4.0.jpg)
+
 ## Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
 ![Status](https://img.shields.io/badge/Status-Version%201.4.0-blue)
