@@ -1,6 +1,6 @@
 # Sistema de Reserva de Entradas de Cine - Concurrencia y Sincronización
 
-![Status](https://img.shields.io/badge/Status-Version%201.2.0-blue)
+![Status](https://img.shields.io/badge/Status-Version%201.3.0-blue)
 ![Language](https://img.shields.io/badge/Language-C%20%2F%20JavaScript-orange)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%2F%20Windows-green)
 
