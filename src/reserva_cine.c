@@ -54,7 +54,7 @@ void limpiar_sala() {
     }
 }
 
-// Funcion que ejecutan los hilos (simulacion de usuario)
+// Función que ejecutan los hilos (simulacion de usuario)
 void* simular_usuario(void* arg) {
     UsuarioData* data = (UsuarioData*)arg;
     int id_usuario = data->id;
@@ -91,7 +91,7 @@ void* simular_usuario(void* arg) {
 
         pthread_mutex_unlock(&sala[f][c].mutex);
 
-        // Pequena pausa entre intentos
+        // Pequeña pausa entre intentos
         usleep((rand() % 50) * 1000);
     }
 
